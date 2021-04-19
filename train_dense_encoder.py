@@ -489,7 +489,7 @@ class BiEncoderTrainer(object):
                 samples_batch, dataset = samples_batch
 
             ds_cfg = self.ds_cfg.train_datasets[dataset]
-            special_token = ds_cfg.special_token
+            special_token = ds_cfg.special_tokens
             encoder_type = ds_cfg.encoder_type
             shuffle_positives = ds_cfg.shuffle_positives
 
