@@ -4,3 +4,8 @@ dpr_wiki:
   _target_: dpr.data.retriever_data.CsvCtxSrc
   file: data.wikipedia_split.psgs_w100
   id_prefix: 'wiki:'
+
+django_small:
+  _target_: dpr.data.retriever_data.StackoverflowDjangoSrc
+  file: data.stackoverflow.django_small
+  id_prefix: 'stackoverflow_django:'

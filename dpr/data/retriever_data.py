@@ -259,6 +259,33 @@ class CsvCtxSrc(RetrieverData):
                 ctxs[sample_id] = BiEncoderPassage(passage, row[self.title_col])
 
 
+class StackoverflowDjangoSrc(RetrieverData):
+    def __init__(
+        self,
+        file: str,
+        id_prefix: str = None,
+        normalize: bool = False,
+    ):
+        super().__init__(file)
+        self.id_prefix = id_prefix
+        self.normalize = normalize
+
+    def load_data_to(self, ctxs: Dict[object, BiEncoderPassage]):
+        super().load_data()
+        with jsonlines.open(self.file, mode="r") as jsonl_reader:
+            id_cnt = 0
+            for row in jsonl_reader:
+                if self.id_prefix:
+                    sample_id = self.id_prefix + str(id_cnt)
+                else:
+                    sample_id = str(id_cnt)
+                id_cnt += 1
+                passage = row["accepted_answer"]
+                if self.normalize:
+                    passage = normalize_passage(passage)
+                ctxs[sample_id] = BiEncoderPassage(passage, row["short_question"])
+
+
 class KiltCsvCtxSrc(CsvCtxSrc):
     def __init__(
         self,
