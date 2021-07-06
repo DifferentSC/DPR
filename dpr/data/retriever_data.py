@@ -31,6 +31,7 @@ class RetrieverData(torch.utils.data.Dataset):
         """
         self.file = file
         self.data_files = []
+        print("File = " + self.file)
 
     def load_data(self):
         self.data_files = get_dpr_files(self.file)
