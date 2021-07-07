@@ -3,6 +3,7 @@ import csv
 import json
 import logging
 import pickle
+import io
 from typing import Dict
 
 import hydra
@@ -299,7 +300,7 @@ class StackoverflowDjangoSrc(RetrieverData):
 
     def load_data_to(self, ctxs: Dict[object, BiEncoderPassage]):
         super().load_data()
-        with open(self.file) as ifile:
+        with io.open(self.file, "r", "utf-8-sig") as ifile:
             id_cnt = 0
             jsonl = json.load(ifile)
             for row in jsonl:
