@@ -112,6 +112,7 @@ class Dataset(torch.utils.data.Dataset):
 
 def get_dpr_files(source_name) -> List[str]:
     if os.path.exists(source_name) or glob.glob(source_name):
+        print("Exists in glob or path!")
         return glob.glob(source_name)
     else:
         # try to use data downloader
