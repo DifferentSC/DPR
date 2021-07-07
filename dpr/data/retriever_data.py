@@ -304,6 +304,8 @@ class StackoverflowDjangoSrc(RetrieverData):
             id_cnt = 0
             jsonl = json.load(ifile)
             for row in jsonl:
+                if row["accepted_answer"] == None:
+                    continue
                 if self.id_prefix:
                     sample_id = self.id_prefix + str(id_cnt)
                 else:
