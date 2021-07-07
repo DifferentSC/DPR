@@ -284,7 +284,7 @@ class StackoverflowDjangoSrc(RetrieverData):
                 passage = row["accepted_answer"]
                 if self.normalize:
                     passage = normalize_passage(passage)
-                ctxs[sample_id] = BiEncoderPassage(passage, row["short_question"])
+                ctxs[sample_id] = BiEncoderPassage(passage, row["short_query"])
 
 
 class KiltCsvCtxSrc(CsvCtxSrc):
