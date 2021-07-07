@@ -31,7 +31,6 @@ class RetrieverData(torch.utils.data.Dataset):
         """
         self.file = file
         self.data_files = []
-        print("File = " + self.file)
 
     def load_data(self):
         self.data_files = get_dpr_files(self.file)
@@ -273,9 +272,10 @@ class StackoverflowDjangoSrc(RetrieverData):
 
     def load_data_to(self, ctxs: Dict[object, BiEncoderPassage]):
         super().load_data()
-        with jsonlines.open(self.file, mode="r") as jsonl_reader:
+        with open(self.file) as ifile:
             id_cnt = 0
-            for row in jsonl_reader:
+            jsonl = json.load(ifile)
+            for row in jsonl:
                 if self.id_prefix:
                     sample_id = self.id_prefix + str(id_cnt)
                 else:
