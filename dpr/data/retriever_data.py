@@ -103,6 +103,33 @@ class CsvQASrc(QASrc):
         self.data = data
 
 
+class StackoverflowDjangoQASrc(QASrc):
+    def __init__(
+        self,
+        file: str,
+        question_col: int = 0,
+        selector: DictConfig = None,
+        special_query_token: str = None,
+        query_special_suffix: str = None,
+    ):
+        super().__init__(file, selector, special_query_token, query_special_suffix)
+        self.question_col = question_col
+
+    def load_data(self):
+        super().load_data()
+        data = []
+        with open(self.file) as ifile:
+            jsonl = json.load(ifile)
+            id_cnt = 0
+            for row in jsonl:
+                question = row["short_query"]
+                answers = eval(row["accepted_answer"])
+                id = str(id_cnt)
+                id_cnt += 1
+                data.append(QASample(self._process_question(question), id, answers))
+        self.data = data
+
+
 class JsonlQASrc(QASrc):
     def __init__(
         self,

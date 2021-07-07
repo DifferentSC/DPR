@@ -23,3 +23,7 @@ trivia_train:
 trivia_dev:
   _target_: dpr.data.retriever_data.CsvQASrc
   file: data.retriever.qas.trivia-dev
+
+django_small_test:
+  _target_: dpr.data.retriever_data.StackoverflowDjangoQASrc
+  file: "/home/Gyewon/DPR/dpr/downloads/data/stackoverflow/django_small.jsonl"
