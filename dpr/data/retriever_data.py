@@ -123,7 +123,7 @@ class StackoverflowDjangoQASrc(QASrc):
             id_cnt = 0
             for row in jsonl:
                 question = row["short_query"]
-                answers = eval(row["accepted_answer"])
+                answers = row["accepted_answer"]
                 id = str(id_cnt)
                 id_cnt += 1
                 data.append(QASample(self._process_question(question), id, answers))
